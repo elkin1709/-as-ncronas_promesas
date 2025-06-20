@@ -1,0 +1,198 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,215,0,0.1)"/></svg>') repeat;
+  animation: sparkle 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkle {
+  0% { transform: translateY(-100px); }
+  100% { transform: translateY(100vh); }
+}
+
+h1 {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: linear-gradient(45deg, #ffd700, #ff6b35, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
+  to { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1)); }
+}
+
+#flipBtn {
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff6b35, #f7931e);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  margin: 2rem 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+#flipBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+  background: linear-gradient(45deg, #f7931e, #ff6b35);
+}
+
+#flipBtn:active {
+  transform: translateY(-1px);
+}
+
+#flipBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+#flipBtn:hover::before {
+  left: 100%;
+}
+
+#result {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 2rem 0;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+#result.showing {
+  animation: resultReveal 0.5s ease-out;
+}
+
+@keyframes resultReveal {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.coin {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+  display: none;
+  z-index: 1000;
+}
+
+.coin.flipping {
+  display: block;
+  animation: coinFlip 1.5s ease-in-out;
+}
+
+@keyframes coinFlip {
+  0% {
+    transform: translate(-50%, -50%) rotateY(0deg) translateY(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(-50%, -50%) rotateY(180deg) translateY(-200px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotateY(360deg) translateY(-300px);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotateY(540deg) translateY(-200px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateY(720deg) translateY(0);
+    opacity: 0;
+  }
+}
+
+.coin::before {
+  content: '₿';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: #b8860b;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #ccc;
+  margin-top: 1rem;
+  opacity: 0.8;
+}
+
+.launching {
+  color: #ffd700 !important;
+  animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+.cara {
+  color: #4CAF50;
+  text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+}
+
+.sello {
+  color: #f44336;
+  text-shadow: 0 0 20px rgba(244, 67, 54, 0.8);
+}
